@@ -1,361 +1,494 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حاسبة أسعار نظام بستان</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>حاسبة أسعار نظام بستان</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 20px;
-            min-height: 100vh;
-        }
+            body {
+                font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                padding: 20px;
+                min-height: 100vh;
+            }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            overflow: hidden;
-        }
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                background: white;
+                border-radius: 20px;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+                overflow: hidden;
+            }
 
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            text-align: center;
-        }
+            .header {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                padding: 30px;
+                text-align: center;
+            }
 
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
+            .header h1 {
+                font-size: 2.5em;
+                margin-bottom: 10px;
+            }
 
-        .header p {
-            font-size: 1.2em;
-            opacity: 0.9;
-        }
+            .header p {
+                font-size: 1.2em;
+                opacity: 0.9;
+            }
 
-        .content {
-            padding: 40px;
-        }
+            .content {
+                padding: 40px;
+            }
 
-        .section {
-            margin-bottom: 40px;
-        }
+            .section {
+                margin-bottom: 40px;
+            }
 
-        .section-title {
-            font-size: 1.8em;
-            color: #333;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid #667eea;
-        }
+            .section-title {
+                font-size: 1.8em;
+                color: #333;
+                margin-bottom: 20px;
+                padding-bottom: 10px;
+                border-bottom: 3px solid #667eea;
+            }
 
-        .mandatory {
-            background: #f0f9ff;
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 5px solid #3b82f6;
-        }
+            .mandatory {
+                background: #f0f9ff;
+                padding: 20px;
+                border-radius: 10px;
+                border-left: 5px solid #3b82f6;
+            }
 
-        .complex {
-            background: #fef2f2;
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 5px solid #ef4444;
-        }
+            .complex {
+                background: #fef2f2;
+                padding: 20px;
+                border-radius: 10px;
+                border-left: 5px solid #ef4444;
+            }
 
-        .medium {
-            background: #fffbeb;
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 5px solid #f59e0b;
-        }
+            .medium {
+                background: #fffbeb;
+                padding: 20px;
+                border-radius: 10px;
+                border-left: 5px solid #f59e0b;
+            }
 
-        .simple {
-            background: #f0fdf4;
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 5px solid #10b981;
-        }
+            .simple {
+                background: #f0fdf4;
+                padding: 20px;
+                border-radius: 10px;
+                border-left: 5px solid #10b981;
+            }
 
-        .feature-item {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            margin: 10px 0;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
+            .feature-item {
+                display: flex;
+                align-items: center;
+                padding: 15px;
+                margin: 10px 0;
+                background: white;
+                border-radius: 8px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                transition: transform 0.2s, box-shadow 0.2s;
+            }
 
-        .feature-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-        }
+            .feature-item:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            }
 
-        .feature-item input[type="checkbox"] {
-            width: 25px;
-            height: 25px;
-            margin-left: 15px;
-            cursor: pointer;
-        }
+            .feature-item input[type="checkbox"] {
+                width: 25px;
+                height: 25px;
+                margin-left: 15px;
+                cursor: pointer;
+            }
 
-        .feature-info {
-            flex: 1;
-        }
+            .feature-info {
+                flex: 1;
+            }
 
-        .feature-name {
-            font-size: 1.1em;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 5px;
-        }
+            .feature-name {
+                font-size: 1.1em;
+                font-weight: bold;
+                color: #333;
+                margin-bottom: 5px;
+            }
 
-        .feature-desc {
-            font-size: 0.9em;
-            color: #666;
-        }
+            .feature-desc {
+                font-size: 0.9em;
+                color: #666;
+            }
 
-        .feature-price {
-            font-size: 1.3em;
-            font-weight: bold;
-            color: #667eea;
-            min-width: 120px;
-            text-align: left;
-        }
+            .feature-price {
+                font-size: 1.3em;
+                font-weight: bold;
+                color: #667eea;
+                min-width: 120px;
+                text-align: left;
+            }
 
-        .price-summary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            border-radius: 15px;
-            margin-top: 30px;
-        }
+            .price-summary {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                padding: 30px;
+                border-radius: 15px;
+                margin-top: 30px;
+            }
 
-        .price-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            font-size: 1.1em;
-        }
+            .price-row {
+                display: flex;
+                justify-content: space-between;
+                padding: 10px 0;
+                font-size: 1.1em;
+            }
 
-        .price-row.total {
-            border-top: 2px solid rgba(255,255,255,0.3);
-            margin-top: 15px;
-            padding-top: 20px;
-            font-size: 1.8em;
-            font-weight: bold;
-        }
+            .price-row.total {
+                border-top: 2px solid rgba(255, 255, 255, 0.3);
+                margin-top: 15px;
+                padding-top: 20px;
+                font-size: 1.8em;
+                font-weight: bold;
+            }
 
-        .mandatory-note {
-            background: #dbeafe;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            color: #1e40af;
-            font-weight: 500;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>🏗️ حاسبة أسعار نظام بستان</h1>
-            <p>اختر الميزات التي تريدها واحسب السعر النهائي</p>
+            .mandatory-note {
+                background: #dbeafe;
+                padding: 15px;
+                border-radius: 8px;
+                margin-bottom: 20px;
+                color: #1e40af;
+                font-weight: 500;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>🏗️ حاسبة أسعار نظام بستان</h1>
+                <p>اختر الميزات التي تريدها واحسب السعر النهائي</p>
+            </div>
+
+            <div class="content">
+                <div class="section">
+                    <h2 class="section-title">الميزات الإلزامية</h2>
+                    <div class="mandatory">
+                        <div class="mandatory-note">
+                            ⚠️ هذه الميزات أساسية ومشمولة تلقائياً في السعر
+                            الأساسي
+                        </div>
+                        <div class="feature-item">
+                            <input
+                                type="checkbox"
+                                id="dashboard"
+                                checked
+                                disabled
+                            />
+                            <div class="feature-info">
+                                <div class="feature-name">
+                                    🎯 لوحة التحكم الذكية
+                                </div>
+                                <div class="feature-desc">
+                                    النظرة الشاملة والإحصائيات الأساسية
+                                </div>
+                            </div>
+                            <div class="feature-price">2,000 ريال</div>
+                        </div>
+                        <div class="feature-item">
+                            <input
+                                type="checkbox"
+                                id="users"
+                                checked
+                                disabled
+                            />
+                            <div class="feature-info">
+                                <div class="feature-name">
+                                    👤 نظام المستخدمين والصلاحيات
+                                </div>
+                                <div class="feature-desc">
+                                    إدارة المستخدمين والتحكم بالصلاحيات
+                                </div>
+                            </div>
+                            <div class="feature-price">1,500 ريال</div>
+                        </div>
+                        <div class="feature-item">
+                            <input
+                                type="checkbox"
+                                id="design"
+                                checked
+                                disabled
+                            />
+                            <div class="feature-info">
+                                <div class="feature-name">
+                                    🎨 التصميم الأساسي والواجهة
+                                </div>
+                                <div class="feature-desc">
+                                    التصميم العام والتنقل في النظام
+                                </div>
+                            </div>
+                            <div class="feature-price">1,000 ريال</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">🔴 ميزات معقدة</h2>
+                    <div class="complex">
+                        <div class="feature-item">
+                            <input
+                                type="checkbox"
+                                id="inventory"
+                                data-price="2200"
+                            />
+                            <div class="feature-info">
+                                <div class="feature-name">📦 إدارة المخزون</div>
+                                <div class="feature-desc">
+                                    تتبع الأصناف بالصور، الأكواد، الكميات،
+                                    تنبيهات انخفاض المخزون
+                                </div>
+                            </div>
+                            <div class="feature-price">2,200 ريال</div>
+                        </div>
+                        <div class="feature-item">
+                            <input
+                                type="checkbox"
+                                id="agents"
+                                data-price="2200"
+                            />
+                            <div class="feature-info">
+                                <div class="feature-name">
+                                    👤 إدارة المندوبين والعهد
+                                </div>
+                                <div class="feature-desc">
+                                    تتبع العهد والأرصدة، رفع الفواتير
+                                    إلكترونياً، تصفية الحسابات أونلاين
+                                </div>
+                            </div>
+                            <div class="feature-price">2,200 ريال</div>
+                        </div>
+                        <div class="feature-item">
+                            <input
+                                type="checkbox"
+                                id="tasks"
+                                data-price="1800"
+                            />
+                            <div class="feature-info">
+                                <div class="feature-name">✅ إدارة المهام</div>
+                                <div class="feature-desc">
+                                    توزيع المهام على الموظفين، متابعة التنفيذ
+                                    والإنجاز، قائمة مهام لكل موظف
+                                </div>
+                            </div>
+                            <div class="feature-price">1,800 ريال</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">🟡 ميزات متوسطة التعقيد</h2>
+                    <div class="medium">
+                        <div class="feature-item">
+                            <input
+                                type="checkbox"
+                                id="competitions"
+                                data-price="1800"
+                            />
+                            <div class="feature-info">
+                                <div class="feature-name">
+                                    🏆 إدارة المنافسات
+                                </div>
+                                <div class="feature-desc">
+                                    توثيق جميع المنافسات لكل عام، متابعة الحالات
+                                    والقيم والترتيب، مقارنة الأداء بين الأعوام
+                                </div>
+                            </div>
+                            <div class="feature-price">1,800 ريال</div>
+                        </div>
+                        <div class="feature-item">
+                            <input
+                                type="checkbox"
+                                id="sales"
+                                data-price="1600"
+                            />
+                            <div class="feature-info">
+                                <div class="feature-name">
+                                    💰 إدارة المبيعات
+                                </div>
+                                <div class="feature-desc">
+                                    سجل مبيعات منظّم لكل سنة، تقارير شاملة قابلة
+                                    للطباعة
+                                </div>
+                            </div>
+                            <div class="feature-price">1,600 ريال</div>
+                        </div>
+                        <div class="feature-item">
+                            <input
+                                type="checkbox"
+                                id="vehicles"
+                                data-price="1500"
+                            />
+                            <div class="feature-info">
+                                <div class="feature-name">
+                                    🚗 إدارة السيارات
+                                </div>
+                                <div class="feature-desc">
+                                    بيانات الأسطول كاملة، سجل الصيانة الدورية،
+                                    متابعة قراءات العداد
+                                </div>
+                            </div>
+                            <div class="feature-price">1,500 ريال</div>
+                        </div>
+                        <div class="feature-item">
+                            <input
+                                type="checkbox"
+                                id="costs"
+                                data-price="1300"
+                            />
+                            <div class="feature-info">
+                                <div class="feature-name">
+                                    📊 إدارة التكاليف
+                                </div>
+                                <div class="feature-desc">
+                                    تصنيف التكاليف حسب النوع، تقارير مفصّلة
+                                    قابلة للطباعة
+                                </div>
+                            </div>
+                            <div class="feature-price">1,300 ريال</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">🟢 ميزات بسيطة</h2>
+                    <div class="simple">
+                        <div class="feature-item">
+                            <input
+                                type="checkbox"
+                                id="files"
+                                data-price="1100"
+                            />
+                            <div class="feature-info">
+                                <div class="feature-name">📁 إدارة الملفات</div>
+                                <div class="feature-desc">
+                                    رفع وتنظيم الملفات، الوصول السريع للمستندات،
+                                    نماذج المؤسسة جاهزة للتحميل
+                                </div>
+                            </div>
+                            <div class="feature-price">1,100 ريال</div>
+                        </div>
+                        <div class="feature-item">
+                            <input
+                                type="checkbox"
+                                id="quotes"
+                                data-price="900"
+                            />
+                            <div class="feature-info">
+                                <div class="feature-name">
+                                    📝 عروض الأسعار والزيارات
+                                </div>
+                                <div class="feature-desc">
+                                    توثيق عروض الأسعار المقدّمة، سجل زيارات
+                                    المندوبين
+                                </div>
+                            </div>
+                            <div class="feature-price">900 ريال</div>
+                        </div>
+                        <div class="feature-item">
+                            <input
+                                type="checkbox"
+                                id="contractors"
+                                data-price="800"
+                            />
+                            <div class="feature-info">
+                                <div class="feature-name">
+                                    🤝 قوائم المقاولين والمصنعين
+                                </div>
+                                <div class="feature-desc">
+                                    بيانات شاملة ومنظّمة، سهولة البحث والوصول
+                                </div>
+                            </div>
+                            <div class="feature-price">800 ريال</div>
+                        </div>
+                        <div class="feature-item">
+                            <input
+                                type="checkbox"
+                                id="dates"
+                                data-price="700"
+                            />
+                            <div class="feature-info">
+                                <div class="feature-name">
+                                    📅 التواريخ المهمة
+                                </div>
+                                <div class="feature-desc">
+                                    تنبيهات انتهاء العقود، متابعة الإيجارات
+                                    والتجديدات
+                                </div>
+                            </div>
+                            <div class="feature-price">700 ريال</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="price-summary">
+                    <div class="price-row">
+                        <span>السعر الأساسي (إلزامي):</span>
+                        <span id="base-price">4,500 ريال</span>
+                    </div>
+                    <div class="price-row">
+                        <span>الميزات المختارة:</span>
+                        <span id="selected-price">0 ريال</span>
+                    </div>
+                    <div class="price-row total">
+                        <span>المجموع النهائي:</span>
+                        <span id="total-price">4,500 ريال</span>
+                    </div>
+                    <div
+                        class="price-row"
+                        style="font-size: 0.9em; opacity: 0.9; margin-top: 10px"
+                    >
+                        <span>الحد الأقصى (جميع الميزات):</span>
+                        <span>18,000 ريال</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="content">
-            <div class="section">
-                <h2 class="section-title">الميزات الإلزامية</h2>
-                <div class="mandatory">
-                    <div class="mandatory-note">
-                        ⚠️ هذه الميزات أساسية ومشمولة تلقائياً في السعر الأساسي
-                    </div>
-                    <div class="feature-item">
-                        <input type="checkbox" id="dashboard" checked disabled>
-                        <div class="feature-info">
-                            <div class="feature-name">🎯 لوحة التحكم الذكية</div>
-                            <div class="feature-desc">النظرة الشاملة والإحصائيات الأساسية</div>
-                        </div>
-                        <div class="feature-price">2,500 ريال</div>
-                    </div>
-                    <div class="feature-item">
-                        <input type="checkbox" id="users" checked disabled>
-                        <div class="feature-info">
-                            <div class="feature-name">👤 نظام المستخدمين والصلاحيات</div>
-                            <div class="feature-desc">إدارة المستخدمين والتحكم بالصلاحيات</div>
-                        </div>
-                        <div class="feature-price">2,000 ريال</div>
-                    </div>
-                    <div class="feature-item">
-                        <input type="checkbox" id="design" checked disabled>
-                        <div class="feature-info">
-                            <div class="feature-name">🎨 التصميم الأساسي والواجهة</div>
-                            <div class="feature-desc">التصميم العام والتنقل في النظام</div>
-                        </div>
-                        <div class="feature-price">1,500 ريال</div>
-                    </div>
-                </div>
-            </div>
+        <script>
+            const basePrice = 4500;
+            const checkboxes = document.querySelectorAll(
+                'input[type="checkbox"][data-price]'
+            );
 
-            <div class="section">
-                <h2 class="section-title">🔴 ميزات معقدة</h2>
-                <div class="complex">
-                    <div class="feature-item">
-                        <input type="checkbox" id="inventory" data-price="2500">
-                        <div class="feature-info">
-                            <div class="feature-name">📦 إدارة المخزون</div>
-                            <div class="feature-desc">تتبع الأصناف بالصور، الأكواد، الكميات، تنبيهات انخفاض المخزون</div>
-                        </div>
-                        <div class="feature-price">2,500 ريال</div>
-                    </div>
-                    <div class="feature-item">
-                        <input type="checkbox" id="agents" data-price="2500">
-                        <div class="feature-info">
-                            <div class="feature-name">👤 إدارة المندوبين والعهد</div>
-                            <div class="feature-desc">تتبع العهد والأرصدة، رفع الفواتير إلكترونياً، تصفية الحسابات أونلاين</div>
-                        </div>
-                        <div class="feature-price">2,500 ريال</div>
-                    </div>
-                    <div class="feature-item">
-                        <input type="checkbox" id="tasks" data-price="2000">
-                        <div class="feature-info">
-                            <div class="feature-name">✅ إدارة المهام</div>
-                            <div class="feature-desc">توزيع المهام على الموظفين، متابعة التنفيذ والإنجاز، قائمة مهام لكل موظف</div>
-                        </div>
-                        <div class="feature-price">2,000 ريال</div>
-                    </div>
-                </div>
-            </div>
+            function calculateTotal() {
+                let selectedTotal = 0;
+                checkboxes.forEach((checkbox) => {
+                    if (checkbox.checked) {
+                        selectedTotal += parseInt(
+                            checkbox.getAttribute("data-price")
+                        );
+                    }
+                });
 
-            <div class="section">
-                <h2 class="section-title">🟡 ميزات متوسطة التعقيد</h2>
-                <div class="medium">
-                    <div class="feature-item">
-                        <input type="checkbox" id="competitions" data-price="2000">
-                        <div class="feature-info">
-                            <div class="feature-name">🏆 إدارة المنافسات</div>
-                            <div class="feature-desc">توثيق جميع المنافسات لكل عام، متابعة الحالات والقيم والترتيب، مقارنة الأداء بين الأعوام</div>
-                        </div>
-                        <div class="feature-price">2,000 ريال</div>
-                    </div>
-                    <div class="feature-item">
-                        <input type="checkbox" id="sales" data-price="1800">
-                        <div class="feature-info">
-                            <div class="feature-name">💰 إدارة المبيعات</div>
-                            <div class="feature-desc">سجل مبيعات منظّم لكل سنة، تقارير شاملة قابلة للطباعة</div>
-                        </div>
-                        <div class="feature-price">1,800 ريال</div>
-                    </div>
-                    <div class="feature-item">
-                        <input type="checkbox" id="vehicles" data-price="1800">
-                        <div class="feature-info">
-                            <div class="feature-name">🚗 إدارة السيارات</div>
-                            <div class="feature-desc">بيانات الأسطول كاملة، سجل الصيانة الدورية، متابعة قراءات العداد</div>
-                        </div>
-                        <div class="feature-price">1,800 ريال</div>
-                    </div>
-                    <div class="feature-item">
-                        <input type="checkbox" id="costs" data-price="1500">
-                        <div class="feature-info">
-                            <div class="feature-name">📊 إدارة التكاليف</div>
-                            <div class="feature-desc">تصنيف التكاليف حسب النوع، تقارير مفصّلة قابلة للطباعة</div>
-                        </div>
-                        <div class="feature-price">1,500 ريال</div>
-                    </div>
-                </div>
-            </div>
+                const total = basePrice + selectedTotal;
 
-            <div class="section">
-                <h2 class="section-title">🟢 ميزات بسيطة</h2>
-                <div class="simple">
-                    <div class="feature-item">
-                        <input type="checkbox" id="files" data-price="1200">
-                        <div class="feature-info">
-                            <div class="feature-name">📁 إدارة الملفات</div>
-                            <div class="feature-desc">رفع وتنظيم الملفات، الوصول السريع للمستندات، نماذج المؤسسة جاهزة للتحميل</div>
-                        </div>
-                        <div class="feature-price">1,200 ريال</div>
-                    </div>
-                    <div class="feature-item">
-                        <input type="checkbox" id="quotes" data-price="1000">
-                        <div class="feature-info">
-                            <div class="feature-name">📝 عروض الأسعار والزيارات</div>
-                            <div class="feature-desc">توثيق عروض الأسعار المقدّمة، سجل زيارات المندوبين</div>
-                        </div>
-                        <div class="feature-price">1,000 ريال</div>
-                    </div>
-                    <div class="feature-item">
-                        <input type="checkbox" id="contractors" data-price="900">
-                        <div class="feature-info">
-                            <div class="feature-name">🤝 قوائم المقاولين والمصنعين</div>
-                            <div class="feature-desc">بيانات شاملة ومنظّمة، سهولة البحث والوصول</div>
-                        </div>
-                        <div class="feature-price">900 ريال</div>
-                    </div>
-                    <div class="feature-item">
-                        <input type="checkbox" id="dates" data-price="800">
-                        <div class="feature-info">
-                            <div class="feature-name">📅 التواريخ المهمة</div>
-                            <div class="feature-desc">تنبيهات انتهاء العقود، متابعة الإيجارات والتجديدات</div>
-                        </div>
-                        <div class="feature-price">800 ريال</div>
-                    </div>
-                </div>
-            </div>
+                document.getElementById("selected-price").textContent =
+                    selectedTotal.toLocaleString("ar-SA") + " ريال";
+                document.getElementById("total-price").textContent =
+                    total.toLocaleString("ar-SA") + " ريال";
+            }
 
-            <div class="price-summary">
-                <div class="price-row">
-                    <span>السعر الأساسي (إلزامي):</span>
-                    <span id="base-price">6,000 ريال</span>
-                </div>
-                <div class="price-row">
-                    <span>الميزات المختارة:</span>
-                    <span id="selected-price">0 ريال</span>
-                </div>
-                <div class="price-row total">
-                    <span>المجموع النهائي:</span>
-                    <span id="total-price">6,000 ريال</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        const basePrice = 6000;
-        const checkboxes = document.querySelectorAll('input[type="checkbox"][data-price]');
-
-        function calculateTotal() {
-            let selectedTotal = 0;
-            checkboxes.forEach(checkbox => {
-                if (checkbox.checked) {
-                    selectedTotal += parseInt(checkbox.getAttribute('data-price'));
-                }
+            checkboxes.forEach((checkbox) => {
+                checkbox.addEventListener("change", calculateTotal);
             });
 
-            const total = basePrice + selectedTotal;
-
-            document.getElementById('selected-price').textContent = selectedTotal.toLocaleString('ar-SA') + ' ريال';
-            document.getElementById('total-price').textContent = total.toLocaleString('ar-SA') + ' ريال';
-        }
-
-        checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', calculateTotal);
-        });
-
-        // Initial calculation
-        calculateTotal();
-    </script>
-</body>
+            // Initial calculation
+            calculateTotal();
+        </script>
+    </body>
 </html>
